@@ -63,14 +63,13 @@ func TestWrappedError(t *testing.T) {
 	}
 }
 
-func BenchmarkNew(b *testing.B) {
-	b.ReportAllocs()
-	var err error
-	for i := 0; i < b.N; i++ {
-		err = New("test err 1")
-	}
-	print(err)
-}
+//func BenchmarkNew(b *testing.B) {
+//	b.ReportAllocs()
+//	for i := 0; i < b.N; i++ {
+//		err := New("test err 1")
+//		keep(err)
+//	}
+//}
 
 func BenchmarkWrap(b *testing.B) {
 	testErr1 := New("test err 1")
@@ -78,9 +77,12 @@ func BenchmarkWrap(b *testing.B) {
 	b.ResetTimer()
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
-		err = Wrap(err, testErr1)
+		ne := Wrap(err, testErr1)
+		keep(ne)
 	}
 }
+
+func keep(err error) {}
 
 func testtrue(t *testing.T, value bool, msg ...string) {
 	if !value {

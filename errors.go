@@ -10,13 +10,13 @@ type err struct {
 }
 
 func New(text string) error {
-	return &err{
-		original: stderrors.New(text),
+	return err{
+		original: genesisErr{text},
 		wrapped:  nil,
 	}
 }
 
-func (e *err) Error() string {
+func (e err) Error() string {
 	var original string
 	var wrapped string
 
@@ -31,7 +31,7 @@ func (e *err) Error() string {
 	return wrapped + ": " + original
 }
 
-func (e *err) Is(target error) bool {
+func (e err) Is(target error) bool {
 	if e == target {
 		return true
 	}
@@ -41,12 +41,12 @@ func (e *err) Is(target error) bool {
 	return stderrors.Is(e.wrapped, target)
 }
 
-func (e *err) Unwrap() error {
+func (e err) Unwrap() error {
 	return e.original
 }
 
 func Wrap(original error, wrapped error) error {
-	return &err{
+	return err{
 		original: original,
 		wrapped: wrapped,
 	}
