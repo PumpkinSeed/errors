@@ -1,8 +1,7 @@
 package errors
 
 import (
-	stdlib "errors"
-	"github.com/pkg/errors"
+	stderrors "errors"
 	"testing"
 )
 
@@ -19,9 +18,9 @@ func TestNew(t *testing.T) {
 
 func TestUnwrap(t *testing.T) {
 	originalErr := New("test")
-	wrappedErr := stdlib.New("text")
+	wrappedErr := stderrors.New("text")
 	err := Wrap(originalErr, wrappedErr)
-	unwrappedErr := stdlib.Unwrap(err)
+	unwrappedErr := stderrors.Unwrap(err)
 
 	if unwrappedErr == nil || unwrappedErr.Error() != "test" {
 		t.Error("Unwrapped error should be 'test'")
@@ -40,12 +39,12 @@ func TestIs(t *testing.T) {
 	err = Wrap(err, testErr3)
 	err = Wrap(err, testErr4)
 
-	testtrue(t, stdlib.Is(err, testErr1), "testErr1")
-	testtrue(t, stdlib.Is(err, testErr2), "testErr2")
-	testtrue(t, stdlib.Is(err, testErr3), "testErr3")
-	testtrue(t, stdlib.Is(err, testErr4), "testErr4")
-	testtrue(t, stdlib.Is(err, err), "own")
-	testfalse(t, stdlib.Is(err, testFail), "testFail")
+	testtrue(t, stderrors.Is(err, testErr1), "testErr1")
+	testtrue(t, stderrors.Is(err, testErr2), "testErr2")
+	testtrue(t, stderrors.Is(err, testErr3), "testErr3")
+	testtrue(t, stderrors.Is(err, testErr4), "testErr4")
+	testtrue(t, stderrors.Is(err, err), "own")
+	testfalse(t, stderrors.Is(err, testFail), "testFail")
 }
 
 func TestWrappedError(t *testing.T) {
@@ -61,24 +60,6 @@ func TestWrappedError(t *testing.T) {
 	expected := "test err 4: test err 3: test err 2: test err 1: origin"
 	if err == nil || err.Error() != expected {
 		t.Errorf("Error should be %s, instead of %s", expected, err.Error())
-	}
-}
-
-func TestCause(t *testing.T) {
-	testErr1 := New("test err 1")
-	testErr2 := New("test err 2")
-	testErr3 := New("test err 3")
-	testErr4 := New("test err 4")
-
-	origin := New("origin")
-	err := Wrap(origin, testErr1)
-	err = Wrap(err, testErr2)
-	err = Wrap(err, testErr3)
-	err = Wrap(err, testErr4)
-
-	caused := errors.Cause(err)
-	if stdlib.Is(caused, origin) {
-		t.Error("Caused should be origin")
 	}
 }
 

@@ -1,8 +1,7 @@
 package errors
 
 import (
-	stdlib "errors"
-	"fmt"
+	stderrors "errors"
 )
 
 type err struct {
@@ -12,7 +11,7 @@ type err struct {
 
 func New(text string) error {
 	return &err{
-		original: stdlib.New(text),
+		original: stderrors.New(text),
 		wrapped:  nil,
 	}
 }
@@ -29,24 +28,20 @@ func (e *err) Error() string {
 	if e.original != nil {
 		original = e.original.Error()
 	}
-	return fmt.Sprintf("%s: %s", wrapped, original)
+	return wrapped + ": " + original
 }
 
 func (e *err) Is(target error) bool {
 	if e == target {
 		return true
 	}
-	if stdlib.Is(e.original, target) {
+	if stderrors.Is(e.original, target) {
 		return true
 	}
-	return stdlib.Is(e.wrapped, target)
+	return stderrors.Is(e.wrapped, target)
 }
 
 func (e *err) Unwrap() error {
-	return e.original
-}
-
-func (e *err) Cause() error {
 	return e.original
 }
 
