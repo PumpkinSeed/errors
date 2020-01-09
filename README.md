@@ -1,3 +1,6 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/PumpkinSeed/errors)](https://goreportcard.com/report/github.com/PumpkinSeed/errors)
+[![Documentation](https://godoc.org/github.com/PumpkinSeed/errors?status.svg)](http://godoc.org/github.com/PumpkinSeed/errors)
+
 # Errors
 
 Simple error package for Go with minimal allocation and high performance. Optimized to keep error on function stack.
