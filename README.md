@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.com/PumpkinSeed/errors.svg?branch=master)](https://travis-ci.com/PumpkinSeed/errors)
 [![Go Report Card](https://goreportcard.com/badge/github.com/PumpkinSeed/errors)](https://goreportcard.com/report/github.com/PumpkinSeed/errors)
 [![Documentation](https://godoc.org/github.com/PumpkinSeed/errors?status.svg)](http://godoc.org/github.com/PumpkinSeed/errors)
+[![Gocover](http://gocover.io/_badge/github.com/PumpkinSeed/errors)](http://gocover.io/github.com/PumpkinSeed/errors)
 
 # Errors
 
