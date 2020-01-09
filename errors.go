@@ -9,6 +9,7 @@ type err struct {
 	wrapped  error
 }
 
+// New creates a new error by using the genesis error
 func New(text string) error {
 	return err{
 		original: genesisErr{text},
@@ -45,6 +46,7 @@ func (e err) Unwrap() error {
 	return e.original
 }
 
+// Wrap new error into an existing error
 func Wrap(original error, wrapped error) error {
 	return err{
 		original: original,
