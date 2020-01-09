@@ -48,6 +48,6 @@ func (e err) Unwrap() error {
 func Wrap(original error, wrapped error) error {
 	return err{
 		original: original,
-		wrapped: wrapped,
+		wrapped:  wrapped,
 	}
 }

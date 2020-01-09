@@ -1,2 +1,3 @@
-# error
-Simple error package 
+# Errors
+
+Simple error package for Go with zero allocation.  
