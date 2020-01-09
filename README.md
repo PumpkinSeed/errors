@@ -16,7 +16,7 @@ Maintain an error chain (some kind of list of errors), and let the system to che
 package main
 
 import (
-    stdlib "errors"
+    stderrors "errors"
 
     "github.com/PumpkinSeed/errors"
 )
@@ -28,9 +28,9 @@ var ErrNotUsed = errors.New("not used err")
 func main() {
     err := f3()
     
-    stdlib.Is(err, ErrGlobal) // true
-    stdlib.Is(err, ErrGlobal2) // true
-    stdlib.Is(err, ErrNotUsed) // false
+    stderrors.Is(err, ErrGlobal) // true
+    stderrors.Is(err, ErrGlobal2) // true
+    stderrors.Is(err, ErrNotUsed) // false
 
     println(err.Error()) // "global err 2: global err: string1"
 }
